@@ -1,0 +1,36 @@
+{
+  "app_name": "TwitterStreamProcessing",
+  "batch_duration": 20,
+  "inputs": [
+    {
+      "name": "twitter_data",
+      "ip": "localhost",
+      "port": 5555,
+      "type": "stream",
+      "sub_type": "socket",
+      "filtering": true,
+      "filter_strings": [
+        "#",
+        "RT:",
+        "http://\\S+|https://\\S+"
+      ],
+      "output_field": "content"
+    }
+  ],
+  "covid_input": {
+    "url": "https://www.worldometers.info/coronavirus/",
+    "output_field": "total_case_count"
+  },
+  "outputs": [
+    {
+      "name": "mongoDB",
+      "ip": "127.0.0.1",
+      "port": 27027,
+      "type": "database",
+      "sub_type": "mongoDB",
+      "schema_name": "test",
+      "table_name": "twitter_covid_data",
+      "description": "schema_name refer to database name and table_nam refers to collection name in mongo db"
+    }
+  ]
+}
